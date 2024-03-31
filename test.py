@@ -2,14 +2,12 @@ from ctypes import *
 
 
 class TxChaCha:
-    dll = cdll.LoadLibrary("libtxchacha.dll")
+    dll = cdll.LoadLibrary("chachagcc.dll")
 
     def __init__(self):
         self.instance = self.dll.init_wasm()
         self.wasm_prepareParam = self.dll.wasm_prepareParam
         self.wasm_prepareParam.argtypes = [c_char_p, c_char_p, c_char_p, c_int, c_int]
-        self.wasm_decData = self.dll.wasm_decData
-        self.wasm_decData.argtypes = [c_void_p, c_char_p, c_long]
         self.get_key_iv = self.dll.get_key_iv
         self.get_key_iv.restype = c_char_p
         self.get_key_iv.argtypes = []
