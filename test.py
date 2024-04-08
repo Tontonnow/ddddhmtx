@@ -32,9 +32,12 @@ if __name__ == '__main__':
     platform = 3850603;
     cc = TxChaCha()
     cc.prepareParam(link_vid, base, appVer, tm, platform)
-    key = cc.get_key_iv()
+    key, iv = string_at(cc.get_key_iv(), 41).split(b',')
     if key:
         print(key)
+        print(iv)
+        print(base64.b64encode(key))
+        print(base64.b64encode(iv))
         input = b"test.ts"
         out = b"test_out.ts"
         cc.decryptTS(input, out)
